@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bl32ehunyxxgs"]
+[gd_scene load_steps=36 format=3 uid="uid://bl32ehunyxxgs"]
 
 [ext_resource type="Texture2D" uid="uid://510pb7pdgbm4" path="res://Assets/Sprites/Characters/Player/Running/Running_008.png" id="1_0k7p4"]
 [ext_resource type="Texture2D" uid="uid://dh2bq7sj4j1yo" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="1_25hkl"]
@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://cqghixsfbx512" path="res://Assets/Sprites/Characters/Player/Running/Running_009.png" id="27_0d1ug"]
 [ext_resource type="Texture2D" uid="uid://b0vptelvrikyc" path="res://Assets/Sprites/Characters/Player/Running/Running_010.png" id="28_pjluo"]
 [ext_resource type="Texture2D" uid="uid://bg7cvib7topp7" path="res://Assets/Sprites/Characters/Player/Running/Running_011.png" id="29_qjp5v"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerIdleState.cs" id="31_qsmlo"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMoveState.cs" id="32_xnwhn"]
 
 [sub_resource type="Animation" id="Animation_miara"]
 resource_name = "idle"
@@ -85,3 +87,9 @@ texture = ExtResource("1_25hkl")
 libraries = {
 "": SubResource("AnimationLibrary_u6rwe")
 }
+
+[node name="IdleState" type="Node" parent="."]
+script = ExtResource("31_qsmlo")
+
+[node name="MoveState" type="Node" parent="."]
+script = ExtResource("32_xnwhn")
