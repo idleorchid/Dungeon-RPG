@@ -98,11 +98,11 @@ _data = {
 "Move": SubResource("Animation_kbihk")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animationPlayer", "sprite3D", "stateMachine")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite3DNode", "StateMachineNode")]
 script = ExtResource("1_m2cib")
-animationPlayer = NodePath("AnimationPlayer")
-sprite3D = NodePath("Sprite3D")
-stateMachine = NodePath("StateMachine")
+AnimationPlayerNode = NodePath("AnimationPlayer")
+Sprite3DNode = NodePath("Sprite3D")
+StateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0240786, -0.823663, 0.224162)
