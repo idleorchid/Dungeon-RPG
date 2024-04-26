@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bl32ehunyxxgs"]
+[gd_scene load_steps=46 format=3 uid="uid://bl32ehunyxxgs"]
 
 [ext_resource type="Texture2D" uid="uid://510pb7pdgbm4" path="res://Assets/Sprites/Characters/Player/Running/Running_008.png" id="1_0k7p4"]
 [ext_resource type="Texture2D" uid="uid://dh2bq7sj4j1yo" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="1_25hkl"]
@@ -40,6 +40,9 @@
 [ext_resource type="Texture2D" uid="uid://7jyoinysd4d1" path="res://Assets/Sprites/Characters/Player/Sliding/Sliding_003.png" id="35_1nx13"]
 [ext_resource type="Texture2D" uid="uid://4j0p4i4jaii6" path="res://Assets/Sprites/Characters/Player/Sliding/Sliding_004.png" id="36_ic2uk"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerDashState.cs" id="38_l4b3r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7aept"]
+height = 1.66495
 
 [sub_resource type="Animation" id="Animation_miara"]
 resource_name = "idle"
@@ -99,15 +102,22 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite3DNode", "StateMachineNode")]
+collision_layer = 2
+floor_max_angle = 1.55334
+floor_snap_length = 0.2
 script = ExtResource("1_m2cib")
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite3DNode = NodePath("Sprite3D")
 StateMachineNode = NodePath("StateMachine")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0500208, 0.111213, 0)
+shape = SubResource("CapsuleShape3D_7aept")
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0240786, -0.823663, 0.224162)
+pixel_size = 0.0025
 texture_filter = 0
-texture = ExtResource("2_1xueo")
+texture = ExtResource("1_25hkl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
