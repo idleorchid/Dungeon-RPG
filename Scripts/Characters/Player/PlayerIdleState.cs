@@ -8,6 +8,7 @@ public partial class PlayerIdleState : Node
     public override void _Ready()
     {
         character = GetOwner<Player>();
+        SetPhysicsProcess(false);
     }
 
     public override void _Notification(int what)
@@ -17,6 +18,11 @@ public partial class PlayerIdleState : Node
         if (what == 5001)
         {
             character.animationPlayer.Play(GameConstants.ANIM_IDLE);
+            SetPhysicsProcess(true);
+        }
+        else if (what == 5002)
+        {
+            SetPhysicsProcess(false);
         }
     }
 

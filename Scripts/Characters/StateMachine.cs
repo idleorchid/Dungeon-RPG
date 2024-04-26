@@ -17,6 +17,7 @@ public partial class StateMachine : Node
         {
             if (state is T)
             {
+                currentState.Notification(5002);
                 currentState = state;
                 currentState.Notification(5001);
                 return;
