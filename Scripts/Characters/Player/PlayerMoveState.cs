@@ -3,7 +3,6 @@ using System;
 
 public partial class PlayerMoveState : Node
 {
-
     private Player character;
 
     public override void _Ready()
@@ -35,7 +34,14 @@ public partial class PlayerMoveState : Node
         if (character.direction == Vector2.Zero)
         {
             character.stateMachine.SwitchState<PlayerIdleState>();
+            return;
         }
+
+        character.Velocity = new(character.direction.X, 0, character.direction.Y);
+        character.Velocity *= 5;
+
+        character.MoveAndSlide();
+        character.Flip();
     }
 
     public override void _Input(InputEvent @event)
