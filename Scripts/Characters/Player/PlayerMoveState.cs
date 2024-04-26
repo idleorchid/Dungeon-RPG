@@ -10,6 +10,7 @@ public partial class PlayerMoveState : Node
     {
         character = GetOwner<Player>();
         SetPhysicsProcess(false);
+        SetProcessInput(false);
     }
 
     public override void _Notification(int what)
@@ -20,10 +21,12 @@ public partial class PlayerMoveState : Node
         {
             character.animationPlayer.Play(GameConstants.ANIM_MOVE);
             SetPhysicsProcess(true);
+            SetProcessInput(true);
         }
         else if (what == 5002)
         {
             SetPhysicsProcess(false);
+            SetProcessInput(false);
         }
     }
 
@@ -32,6 +35,14 @@ public partial class PlayerMoveState : Node
         if (character.direction == Vector2.Zero)
         {
             character.stateMachine.SwitchState<PlayerIdleState>();
+        }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsActionJustPressed(GameConstants.INPUT_DASH))
+        {
+            character.stateMachine.SwitchState<PlayerDashState>();
         }
     }
 }
