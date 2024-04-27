@@ -15,15 +15,20 @@ public partial class EnemyReturnState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
-        if (character.GlobalPosition != destination)
+        if (!character.AgentNode.IsNavigationFinished())
         {
             character.Velocity = character.GlobalPosition.DirectionTo(destination);
             character.MoveAndSlide();
+        }
+        else
+        {
+            GD.Print("reached destination");
         }
     }
 
     protected override void EnterState()
     {
         character.AnimationPlayerNode.Play(GameConstants.ANIM_MOVE);
+        character.AgentNode.TargetPosition = destination;
     }
 }

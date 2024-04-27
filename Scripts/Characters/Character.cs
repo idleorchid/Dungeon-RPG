@@ -9,6 +9,7 @@ public abstract partial class Character : CharacterBody3D
 
     [ExportGroup("AI Nodes")]
     [Export] public Path3D Path3DNode { get; private set; }
+    [Export] public NavigationAgent3D AgentNode { get; private set; }
 
     public Vector2 direction = new();
 

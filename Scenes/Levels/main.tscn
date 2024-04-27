@@ -172,7 +172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9299, 1.24205, 0)
 curve = SubResource("Curve3D_3cb0i")
 
 [node name="Enemy" parent="Enemies/Path3D" node_paths=PackedStringArray("Path3DNode") instance=ExtResource("4_v6pgb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92526, 0.589675, 0.951728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9403, 0.589675, 0.951728)
 Path3DNode = NodePath("..")
 
 [node name="Path3D2" type="Path3D" parent="Enemies"]
