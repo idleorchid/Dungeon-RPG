@@ -1,6 +1,7 @@
-[gd_scene load_steps=107 format=3 uid="uid://bxln7dd31qpj3"]
+[gd_scene load_steps=110 format=3 uid="uid://bxln7dd31qpj3"]
 
 [ext_resource type="Texture2D" uid="uid://cql055s5wuq6q" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_000.png" id="1_2svcy"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemy/Enemy.cs" id="1_27nh6"]
 [ext_resource type="Texture2D" uid="uid://bsarav20ev608" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_011.png" id="1_hpodx"]
 [ext_resource type="Texture2D" uid="uid://cmdl70j3dea1k" path="res://Assets/Sprites/Characters/Enemy Knight/Death/smoke-Fx3_17.png" id="1_qylgt"]
 [ext_resource type="Texture2D" uid="uid://box0afw5b56r3" path="res://Assets/Sprites/Characters/Enemy Knight/Death/0_Demons_of_Darkness_Dying_014.png" id="1_uohvc"]
@@ -99,6 +100,8 @@
 [ext_resource type="Texture2D" uid="uid://bg61mwmo2wmuc" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_008.png" id="67_lek12"]
 [ext_resource type="Texture2D" uid="uid://n30ylmvdmoqi" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_009.png" id="68_4y5jg"]
 [ext_resource type="Texture2D" uid="uid://f1a26max0huk" path="res://Assets/Sprites/Characters/Enemy Knight/Attack/0_Demons_of_Darkness_Slashing_010.png" id="69_ds2ur"]
+[ext_resource type="PackedScene" uid="uid://bvjicxbvdv8pn" path="res://Scenes/Characters/state_machine.tscn" id="100_ijm5a"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemyIdleState.cs" id="101_mxp41"]
 
 [sub_resource type="Animation" id="Animation_4808g"]
 resource_name = "attack"
@@ -130,6 +133,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("20_bw7br"), ExtResource("20_gs8f6"), ExtResource("21_y7odv"), ExtResource("22_grumy"), ExtResource("23_bmsh5"), ExtResource("24_q8kk1"), ExtResource("25_fgkat"), ExtResource("26_lmnux"), ExtResource("27_vo6b4"), ExtResource("28_gck43"), ExtResource("29_p1b63"), ExtResource("30_yaanl"), ExtResource("31_267rx"), ExtResource("32_vjer2"), ExtResource("1_uohvc"), ExtResource("30_nsh5t"), ExtResource("31_1i682"), ExtResource("32_bvflm"), ExtResource("33_wanvh"), ExtResource("34_iohkh"), ExtResource("35_chbxr"), ExtResource("36_ok8cl"), ExtResource("37_l33ho"), ExtResource("38_gm28p"), ExtResource("39_31rrj"), ExtResource("40_wy55m"), ExtResource("41_tby6k"), ExtResource("42_4skfi"), ExtResource("43_i63nm"), ExtResource("44_2ltjy"), ExtResource("45_hwyo1"), ExtResource("46_kn2r1"), ExtResource("1_qylgt")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.424242, 0.545455),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0025, 0.0025, 0.0075]
 }
 
 [sub_resource type="Animation" id="Animation_y1o4v"]
@@ -194,11 +209,15 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_18nen"]
 height = 1.47587
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite3DNode", "StateMachineNode")]
+script = ExtResource("1_27nh6")
+AnimationPlayerNode = NodePath("AnimationPlayer")
+Sprite3DNode = NodePath("Sprite3D")
+StateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.0025
-texture = ExtResource("1_qylgt")
+texture = ExtResource("1_2svcy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -208,3 +227,10 @@ libraries = {
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0570313, -0.00524175, 0)
 shape = SubResource("CapsuleShape3D_18nen")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("100_ijm5a")]
+currentState = NodePath("IdleState")
+states = [NodePath("IdleState")]
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("101_mxp41")
