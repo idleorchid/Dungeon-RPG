@@ -46,7 +46,7 @@ public abstract partial class Character : CharacterBody3D
         GD.Print(health.StatValue);
     }
 
-    private StatResource GetStatResource(Stat stat)
+    public StatResource GetStatResource(Stat stat)
     {
         return stats.Where(x => x.StatType == stat).FirstOrDefault();
     }

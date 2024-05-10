@@ -1,3 +1,5 @@
+using Godot;
+
 public class GameConstants
 {
     // Animations
@@ -5,6 +7,7 @@ public class GameConstants
     public const string ANIM_MOVE = "Move";
     public const string ANIM_DASH = "Dash";
     public const string ANIM_ATTACK = "Attack";
+    public const string ANIM_DEATH = "Death";
 
     // Inputs
     public const string INPUT_MOVE_LEFT = "MoveLeft";
@@ -17,4 +20,6 @@ public class GameConstants
     // Notifications
     public const int NOTIFICATION_ENTER_STATE = 5001;
     public const int NOTIFICATION_EXIT_STATE = 5002;
+
+
 }

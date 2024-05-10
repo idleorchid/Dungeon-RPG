@@ -14,6 +14,8 @@ public partial class StateMachine : Node
 
     public void SwitchState<T>()
     {
+        if (currentState is T) return;
+
         Node state = states.Where(x => x is T).FirstOrDefault();
         if (state == null) return;
 
