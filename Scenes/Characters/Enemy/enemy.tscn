@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://bxln7dd31qpj3"]
+[gd_scene load_steps=125 format=3 uid="uid://bxln7dd31qpj3"]
 
 [ext_resource type="Texture2D" uid="uid://cql055s5wuq6q" path="res://Assets/Sprites/Characters/Enemy Knight/Idle/0_Demons_of_Darkness_Idle_000.png" id="1_2svcy"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/Enemy.cs" id="1_27nh6"]
@@ -110,6 +110,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemyAttackState.cs" id="106_0ld14"]
 [ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemyDeathState.cs" id="108_yadyr"]
 [ext_resource type="Script" path="res://Scripts/Characters/AttackHitbox.cs" id="109_yunai"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemy/EnemyStunState.cs" id="110_fle1m"]
 
 [sub_resource type="Resource" id="Resource_qj4fx"]
 script = ExtResource("2_fbla8")
@@ -243,7 +244,7 @@ _data = {
 "Death": SubResource("Animation_4ml5a"),
 "Idle": SubResource("Animation_y1o4v"),
 "Move": SubResource("Animation_48wfv"),
-"TakeHit": SubResource("Animation_n0r27")
+"Stun": SubResource("Animation_n0r27")
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_18nen"]
@@ -292,7 +293,7 @@ shape = SubResource("CapsuleShape3D_18nen")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("100_ijm5a")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState"), NodePath("DeathState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState"), NodePath("DeathState"), NodePath("StunState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("101_mxp41")
@@ -320,6 +321,9 @@ script = ExtResource("106_0ld14")
 
 [node name="DeathState" type="Node" parent="StateMachine"]
 script = ExtResource("108_yadyr")
+
+[node name="StunState" type="Node" parent="StateMachine"]
+script = ExtResource("110_fle1m")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
