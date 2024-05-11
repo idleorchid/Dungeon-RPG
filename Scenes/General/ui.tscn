@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cutwxaqdwr5or"]
+[gd_scene load_steps=26 format=3 uid="uid://cutwxaqdwr5or"]
 
 [ext_resource type="Script" path="res://Scripts/UI/UIController.cs" id="1_3kjo7"]
 [ext_resource type="Texture2D" uid="uid://b45607paoce5d" path="res://Assets/Sprites/UI/UI Element 1.png" id="1_mk7oc"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b2so2bipira8r" path="res://Assets/Sprites/UI/UI ElementUI 11.png" id="17_fnd6e"]
 [ext_resource type="Texture2D" uid="uid://pjw0kjouc1t0" path="res://Assets/Sprites/UI/UI Element 5.png" id="18_ohn2e"]
 [ext_resource type="Texture2D" uid="uid://cxidehd4mp3i4" path="res://Assets/Sprites/UI/UI Element 4.png" id="19_uppbr"]
+[ext_resource type="Texture2D" uid="uid://cdgnxce2a6qr0" path="res://Assets/Sprites/UI/UI ElementUI 13.png" id="20_1756y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_plftm"]
 texture = ExtResource("3_5bj0g")
@@ -139,6 +140,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_qk5dt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/Strength"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 4.0
 offset_right = 79.0
@@ -165,6 +167,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_qk5dt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats/MarginContainer/VBoxContainer/EnemyCount"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 4.0
 offset_right = 79.0
@@ -306,6 +309,73 @@ size_flags_horizontal = 4
 texture = ExtResource("18_ohn2e")
 
 [node name="Button" type="Button" parent="Pause/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_j1iyc")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxTexture_cmk67")
+theme_override_styles/hover = SubResource("StyleBoxTexture_cmk67")
+theme_override_styles/focus = SubResource("StyleBoxTexture_cmk67")
+text = "CONTINUE"
+
+[node name="Reward" type="PanelContainer" parent="." node_paths=PackedStringArray("ButtonNode", "TextureNode", "LabelNode")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -260.0
+offset_right = 260.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_pjqer")
+script = ExtResource("1_saw4c")
+Container = 5
+ButtonNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Button")
+TextureNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TextureRect")
+LabelNode = NodePath("MarginContainer/VBoxContainer/VBoxContainer/RewardText")
+
+[node name="MarginContainer" type="MarginContainer" parent="Reward"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Reward/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Reward/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_j1iyc")
+theme_override_font_sizes/font_size = 48
+text = "REWARD"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Reward/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="TextureRect" type="TextureRect" parent="Reward/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("20_1756y")
+
+[node name="RewardText" type="Label" parent="Reward/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_j1iyc")
+theme_override_font_sizes/font_size = 22
+text = "REWARD"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Reward/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
