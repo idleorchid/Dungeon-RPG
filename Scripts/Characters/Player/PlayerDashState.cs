@@ -4,6 +4,7 @@ using System;
 public partial class PlayerDashState : PlayerState
 {
     [Export] private Timer dashTimer;
+    [Export] private Timer cooldownTimer;
     [Export(PropertyHint.Range, "0,20,0.1")] private float speed = 10f;
 
     [Export] private PackedScene bombScene;
@@ -12,6 +13,7 @@ public partial class PlayerDashState : PlayerState
     {
         base._Ready();
         dashTimer.Timeout += HandleDashTimeout;
+        CanTransition = () => cooldownTimer.IsStopped();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -22,6 +24,7 @@ public partial class PlayerDashState : PlayerState
 
     private void HandleDashTimeout()
     {
+        cooldownTimer.Start();
         character.Velocity = Vector3.Zero;
         character.StateMachineNode.SwitchState<PlayerIdleState>();
     }

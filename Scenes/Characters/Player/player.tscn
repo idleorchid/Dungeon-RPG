@@ -276,13 +276,19 @@ libraries = {
 currentState = NodePath("IdleState")
 states = [NodePath("IdleState"), NodePath("DashState"), NodePath("MoveState"), NodePath("AttackState"), NodePath("DeathState")]
 
-[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashTimer")]
+[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("dashTimer", "cooldownTimer")]
 script = ExtResource("38_l4b3r")
-dashTimer = NodePath("Timer")
+dashTimer = NodePath("DurationTimer")
+cooldownTimer = NodePath("CoolDownTimer")
 bombScene = ExtResource("80_yk5wt")
 
-[node name="Timer" type="Timer" parent="StateMachine/DashState"]
+[node name="DurationTimer" type="Timer" parent="StateMachine/DashState"]
 wait_time = 0.4
+one_shot = true
+
+[node name="CoolDownTimer" type="Timer" parent="StateMachine/DashState"]
+process_mode = 3
+wait_time = 3.0
 one_shot = true
 
 [node name="MoveState" type="Node" parent="StateMachine"]
