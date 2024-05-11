@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://bl32ehunyxxgs"]
+[gd_scene load_steps=98 format=3 uid="uid://bl32ehunyxxgs"]
 
 [ext_resource type="Texture2D" uid="uid://510pb7pdgbm4" path="res://Assets/Sprites/Characters/Player/Running/Running_008.png" id="1_0k7p4"]
 [ext_resource type="Texture2D" uid="uid://dh2bq7sj4j1yo" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_000.png" id="1_25hkl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://slghhix4duvr" path="res://Assets/Sprites/Characters/Player/Dying/Dying_014.png" id="3_aigvp"]
 [ext_resource type="Texture2D" uid="uid://cdhnucthkbefk" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_001.png" id="3_hy58s"]
 [ext_resource type="Resource" uid="uid://ccnp247ty0jqw" path="res://Resources/player_strength_stat.tres" id="3_wapyn"]
+[ext_resource type="Shader" path="res://Shaders/character_hurt.gdshader" id="4_3ehav"]
 [ext_resource type="Texture2D" uid="uid://b5xymdhy7cknp" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_002.png" id="4_ug1b0"]
 [ext_resource type="Texture2D" uid="uid://brkn8f7evd7rj" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_003.png" id="5_3tfpy"]
 [ext_resource type="Texture2D" uid="uid://c6hoat2m71yf5" path="res://Assets/Sprites/Characters/Player/Idle Blinking/Idle Blinking_004.png" id="6_h101t"]
@@ -89,6 +90,13 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7aept"]
 height = 1.66495
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkq4y"]
+render_priority = 1
+shader = ExtResource("4_3ehav")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/tex = ExtResource("1_25hkl")
 
 [sub_resource type="Animation" id="Animation_qth2l"]
 resource_name = "Attack1"
@@ -229,7 +237,7 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7gyl"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite3DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite3DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode", "HurtTimer")]
 collision_layer = 2
 collision_mask = 5
 floor_max_angle = 1.55334
@@ -242,15 +250,21 @@ StateMachineNode = NodePath("StateMachine")
 HurtboxNode = NodePath("Hurtbox")
 HitboxNode = NodePath("Hitbox")
 HitboxShapeNode = NodePath("Hitbox/CollisionShape3D")
+HurtTimer = NodePath("HurtTimer")
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0500208, 0.111213, 0)
 shape = SubResource("CapsuleShape3D_7aept")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+material_overlay = SubResource("ShaderMaterial_xkq4y")
 pixel_size = 0.0025
 texture_filter = 0
-texture = ExtResource("1_25hkl")
+texture = ExtResource("38_wixpc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
