@@ -23,6 +23,7 @@ public abstract partial class Character : CharacterBody3D
 
     public override void _Ready()
     {
+
         HurtboxNode.AreaEntered += HandleHurtboxEntered;
     }
 
@@ -38,12 +39,13 @@ public abstract partial class Character : CharacterBody3D
 
     private void HandleHurtboxEntered(Area3D area)
     {
-        StatResource health = GetStatResource(Stat.Health);
+        if (area is IHitbox hitbox)
+        {
+            StatResource health = GetStatResource(Stat.Health);
+            health.StatValue -= hitbox.GetDamage();
 
-        Character player = area.GetOwner<Character>();
-        health.StatValue -= player.GetStatResource(Stat.Strength).StatValue;
-
-        GD.Print(health.StatValue);
+            GD.Print(health.StatValue);
+        }
     }
 
     public StatResource GetStatResource(Stat stat)
